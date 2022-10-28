@@ -15,7 +15,7 @@ using namespace std;
 struct Inventory
 {
 	int inventoryID;
-	std::string productName;
+	string productName;
 	double cost;
 	int quantity;
 };
@@ -24,11 +24,10 @@ struct Inventory
 //function to display the array with column headings
 void displayInventory(Inventory[], int);
 //function to sort the array by ID
-void sortInventory(Inventory[], int);
-//function to sort the array by price
-void sortInventoryByPrice(Inventory[], int);
-//function to display money in currency format with 2 decimal places
-void displayMoney(double);
+void sortID(Inventory[], int);
+//function to sort the array by cost
+void sortCost(Inventory[], int);
+
 
 
 
@@ -61,18 +60,7 @@ int main()
 		//create a temporary struct to hold the inventory
 		Inventory temp;
 		//sort the inventory by ID
-		for (int i = 0; i < 10; i++)
-		{
-			for (int j = i + 1; j < 10; j++)
-			{
-				if (inventory[i].inventoryID > inventory[j].inventoryID)
-				{
-					temp = inventory[i];
-					inventory[i] = inventory[j];
-					inventory[j] = temp;
-				} //end if statement
-			} //end for loop 1
-		} //end for loop 2
+		sortID(inventory, 10);
 	} //end if statement
 	else if (choice == 'p')
 	{
@@ -80,18 +68,7 @@ int main()
 		//create a temporary struct to hold the inventory
 		Inventory temp;
 		//sort the inventory by price
-		for (int i = 0; i < 10; i++)
-		{
-			for (int j = i + 1; j < 10; j++)
-			{
-				if (inventory[i].cost > inventory[j].cost)
-				{
-					temp = inventory[i];
-					inventory[i] = inventory[j];
-					inventory[j] = temp;
-				} //end if statement
-			} //end for loop 1
-		} //end for loop 2
+		sortCost(inventory, 10);
 	} //end else if statement
 	else
 	{
@@ -101,51 +78,70 @@ int main()
 	
 	//display the inventory
 	displayInventory(inventory, 10);
-	//Ask the user which item they want to purchase and what quantity; validate that the item number is valid and that there is enough of it in inventory.
 	cout << "Which item would you like to purchase? (-1 to stop) ";
-	int itemNumber;
-	cin >> itemNumber;
-	while (itemNumber != -1)
+	// search for the item the user wants to purchase
+	int item;
+	cin >> item;
+	double runningTotal = 0;
+	while (item != -1)
 	{
-		//validate the item number
-		if (itemNumber < 1 || itemNumber > 10)
+		//search for the item
+		for (int i = 0; i < 10; i++)
 		{
-			cout << "Invalid item number. Please try again.\n\n";
-		} //end if statement
-		else
-		{
-			//ask the user how many they want to purchase
-			cout << "How many would you like to purchase?\n\n";
-			int quantity;
-			cin >> quantity;
-			//validate the quantity
-			if (quantity < 1 || quantity > inventory[itemNumber - 1].quantity)
+			if (inventory[i].inventoryID == item)
 			{
-				cout << "Invalid quantity. Please try again.\n\n";
+				//display the item
+				cout << "Item " << inventory[i].productName << ": " << "How many would you like to purchase? ";
+				int quantity;
+				cin >> quantity;
+				//make sure user input is not less than -1
+				while (quantity < -1)
+				{
+					cout << "Invalid quantity. Please enter a quantity greater than or equal to 1: ";
+					cin >> quantity;
+				} //end while loop
+				//check to see if there is enough in stock
+				if (quantity > inventory[i].quantity)
+				{
+					cout << "Sorry, we do not have that many in stock.\n\n";
+				} //end if statement
+				else
+				{
+					//update the quantity
+					inventory[i].quantity -= quantity;
+					//display the total
+					double total = inventory[i].cost * quantity;
+					cout << "Cost for all those items: $" << total << endl;
+					// add total to the running total
+					
+					runningTotal += total;
+					
+					cout << endl;
+				} //end else statement
 			} //end if statement
-			else
-			{
-				//subtract the quantity from the inventory
-				inventory[itemNumber - 1].quantity -= quantity;
-				//display the cost
-				cout << "Cost for this item is $" << fixed << setprecision(2) << inventory[itemNumber - 1].cost * quantity << endl;
-			} //end else statement
-		} //end else statement
-		//ask the user which item they want to purchase and what quantity; validate that the item number is valid and that there is enough of it in inventory.
+		} //end for loop
 		cout << "Which item would you like to purchase? (-1 to stop) ";
-		cin >> itemNumber;
+		cin >> item;
 	} //end while loop
 
-	//Display the total cost of all the item purchased
-	double totalCost = 0;
-	for (int i = 0; i < 10; i++)
+
+	if (runningTotal > 0)
 	{
-		totalCost += inventory[i].cost * (10 - inventory[i].quantity);
-	} //end for loop
-	cout << "Total cost of all items purchased is $" << fixed << setprecision(2) << totalCost << endl;
+		//Display the running total
+		cout << "Total cost of all items purchased: $" << runningTotal << endl;
+	} //end if statement
+	else
+	{
+		//do nothing
+	} //end else statement
+	
+
+
 	cout << "Thank you for shopping at the Office Supply Store!\n\n";
 	system("pause");
-	return 0;	
+	return 0;
+
+		
 } // end main function
 
 //function to display the array with column headings
@@ -153,7 +149,7 @@ void displayInventory(Inventory inventory[], int size)
 {
 	cout << "Inventory List\n\n";
 	cout << "ID\tProduct Name\tCost\tQuantity\n";
-	cout << "-------------------------------------------------\n";
+	cout << "-----------------------------------------\n";
 
 	if (choice == 'd')
 	{
@@ -208,3 +204,40 @@ void displayInventory(Inventory inventory[], int size)
 	} //end else statement
 	cout << endl;
 } //end displayInventory function
+
+//function to sort the array by ID
+void sortID(Inventory inventory[], int size)
+{
+	Inventory temp;
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = i + 1; j < size; j++)
+		{
+			if (inventory[i].inventoryID > inventory
+				[j].inventoryID)
+			{
+				temp = inventory[i];
+				inventory[i] = inventory[j];
+				inventory[j] = temp;
+			} //end if statement
+		} //end for loop
+	} //end for loop
+} //end sortID function
+
+//function to sort the array by cost
+void sortCost(Inventory inventory[], int size)
+{
+	Inventory temp;
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = i + 1; j < size; j++)
+		{
+			if (inventory[i].cost > inventory[j].cost)
+			{
+				temp = inventory[i];
+				inventory[i] = inventory[j];
+				inventory[j] = temp;
+			} //end if statement
+		} //end for loop
+	} //end for loop
+} //end sortCost function
