@@ -71,8 +71,8 @@ int main()
 					inventory[i] = inventory[j];
 					inventory[j] = temp;
 				} //end if statement
-			} //end for loop
-		} //end for loop
+			} //end for loop 1
+		} //end for loop 2
 	} //end if statement
 	else if (choice == 'p')
 	{
@@ -90,8 +90,8 @@ int main()
 					inventory[i] = inventory[j];
 					inventory[j] = temp;
 				} //end if statement
-			} //end for loop
-		} //end for loop
+			} //end for loop 1
+		} //end for loop 2
 	} //end else if statement
 	else
 	{
@@ -169,10 +169,8 @@ void displayInventory(Inventory inventory[], int size)
 	} //end if statement
 	else if (choice == 'p')
 	{
-		for (int i = 0; i < 1; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
+		// for the first item in the array add a zero to the cost
+		cout << inventory[0].inventoryID << "\t" << inventory[0].productName << "\t\t$" << inventory[0].cost << fixed << setprecision(2) << "0" << "\t" << inventory[0].quantity << endl;
 		for (int i = 1; i < 5; i++)
 		{
 			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
