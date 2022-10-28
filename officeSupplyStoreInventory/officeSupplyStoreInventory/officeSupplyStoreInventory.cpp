@@ -95,7 +95,7 @@ int main()
 	} //end else if statement
 	else
 	{
-		cout << "";
+		// do not sort the inventory
 	} //end else statement
 	
 	
@@ -195,7 +195,16 @@ void displayInventory(Inventory inventory[], int size)
 	} //end else if statement
 	else
 	{
-		cout << "";
+		// do not sort the inventory, just display it
+		for (int i = 0; i < 6; i++)
+		{
+			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
+		} //end for loop
+		for (int i = 6; i < 9; i++)
+		{
+			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
+		} //end for loop
+		cout << inventory[9].inventoryID << "\t" << inventory[9].productName << "\t\t$" << inventory[9].cost << fixed << setprecision(2) << "\t" << inventory[9].quantity << endl;
 	} //end else statement
 	cout << endl;
 } //end displayInventory function
