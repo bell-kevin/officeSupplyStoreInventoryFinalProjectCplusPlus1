@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <sstream>
 using namespace std;
 //Create a project that simulates an office supply store with inventory
 //need an array of structs or class objects to store the inventory; read the inventory from inventory.txt to store in that array
@@ -27,6 +28,8 @@ void displayInventory(Inventory[], int);
 void sortID(Inventory[], int);
 //function to sort the array by cost
 void sortCost(Inventory[], int);
+string dollarFormat(string);
+string dollarFormat(double);
 
 
 
@@ -128,7 +131,7 @@ int main()
 	if (runningTotal > 0)
 	{
 		//Display the running total
-		cout << "Total cost of all items purchased: $" << runningTotal << endl;
+		cout << "Total cost of all items purchased: " << dollarFormat(runningTotal) << endl;
 	} //end if statement
 	else
 	{
@@ -241,3 +244,40 @@ void sortCost(Inventory inventory[], int size)
 		} //end for loop
 	} //end for loop
 } //end sortCost function
+
+//**************************************************************
+// Returns a $-formatted version of the input string.          *
+//**************************************************************
+string dollarFormat(string original)
+{
+	string formatted = original; // formatted string to return
+	int decimalPos = formatted.find('.'); // position of decimal
+	int pos = decimalPos; // position to insert commas
+
+	while (pos > 3) // insert commas until pos is less than 3
+	{
+		pos -= 3; // move pos back 3 spaces
+		formatted.insert(pos, ","); // insert comma
+	} // end while loop
+	formatted.insert(0, "$"); // insert dollar sign
+	return formatted; // return formatted string
+} // end dollarFormat
+
+
+//**************************************************************
+// Returns a $-formatted version of the input double.          *
+//**************************************************************
+string dollarFormat(double value) {
+
+	//creat ostringstream oject
+	ostringstream ostr;
+
+	//set format flags
+	ostr << fixed << setprecision(2);
+
+	//insert value into stream
+	ostr << value;
+
+	//return formatted string
+	return dollarFormat(ostr.str());
+} // end dollarFormat
