@@ -102,7 +102,7 @@ int main()
 	//display the inventory
 	displayInventory(inventory, 10);
 	//Ask the user which item they want to purchase and what quantity; validate that the item number is valid and that there is enough of it in inventory.
-	cout << "Which item would you like to purchase? (-1 to stop)\n\n";
+	cout << "Which item would you like to purchase? (-1 to stop) ";
 	int itemNumber;
 	cin >> itemNumber;
 	while (itemNumber != -1)
