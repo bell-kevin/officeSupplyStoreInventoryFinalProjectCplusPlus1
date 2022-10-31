@@ -31,7 +31,7 @@ Inventory sorted by ID ascending (smallest to largest):
 
 Inventory sorted by price ascending (smallest to largest):
 
-Final - sort by price
+![Final - sort by price](https://github.com/bell-kevin/officeSupplyStoreInventoryFinalProjectCplusPlus1/blob/main/final0.PNG)
 
 If the user does not select an appropriate sorting option, don't sort the file, just display it as it was loaded from the file:
 
