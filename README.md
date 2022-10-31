@@ -51,7 +51,7 @@ Final - all bad
 
 This shows no purchase at all:
 
-Final - no purchase
+![Final - no purchase](https://github.com/bell-kevin/officeSupplyStoreInventoryFinalProjectCplusPlus1/blob/main/final000.PNG)
 
 Validate the item ID the user provides and keep prompting the user until it is valid. Check if there is available inventory for the purchase, and if not, do not complete the transaction but present an error message. If there were no purchases before the user decided to quit, do not display a total cost of $0 -- don't display anything at all about a purchase. All money values must be displayed in currency format -- with a dollar sign, a comma separator if the value is in the thousands, a decimal point and 2 decimal places. The inventory list must display with column headings, as seen in the images.
 
