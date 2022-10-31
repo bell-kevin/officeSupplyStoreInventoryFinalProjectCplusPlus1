@@ -7,12 +7,7 @@
 #include <iomanip>
 #include <sstream>
 using namespace std;
-//Create a project that simulates an office supply store with inventory
-//need an array of structs or class objects to store the inventory; read the inventory from inventory.txt to store in that array
-//The file has the inventory ID, product name, cost, and quantity on a single line for each item; there are 10 items in this inventory file
 
-
-//create a struct to store the inventory
 struct Inventory
 {
 	int inventoryID;
@@ -22,17 +17,11 @@ struct Inventory
 };
 
 //function prototypes
-//function to display the array with column headings
 void displayInventory(Inventory[], int);
-//function to sort the array by ID
 void sortID(Inventory[], int);
-//function to sort the array by cost
 void sortCost(Inventory[], int);
 string dollarFormat(string);
 string dollarFormat(double);
-
-
-
 
 char choice;
 
@@ -42,11 +31,10 @@ int main()
 	cout << "Do you want to view the inventory sorted by ID (d) or price (p)? ";
 	cin >> choice;
 	cout << endl;
-	//create an array of structs to store the inventory
+	//array of structs
 	Inventory inventory[10];
-	//create a file object to read the inventory from the file
+	//file object
 	ifstream inventoryFile;
-	//open the file
 	inventoryFile.open("inventory.txt");
 	//read the inventory from the file
 	for (int i = 0; i < 10; i++)
@@ -56,21 +44,17 @@ int main()
 	//close the file
 	inventoryFile.close();
 
-	//determine how to sort the inventory using if else statement
+	//sort the inventory 
 	if (choice == 'd')
 	{
 		//sort the inventory by ID
-		//create a temporary struct to hold the inventory
 		Inventory temp;
-		//sort the inventory by ID
 		sortID(inventory, 10);
 	} //end if statement
 	else if (choice == 'p')
 	{
 		//sort the inventory by price
-		//create a temporary struct to hold the inventory
 		Inventory temp;
-		//sort the inventory by price
 		sortCost(inventory, 10);
 	} //end else if statement
 	else
@@ -81,19 +65,21 @@ int main()
 	
 	//display the inventory
 	displayInventory(inventory, 10);
+
+	
 	cout << "Which item would you like to purchase? (-1 to stop) ";
-	// search for the item the user wants to purchase
+	// search for item user wants
 	int item;
 	cin >> item;
 	double runningTotal = 0;
 	while (item != -1)
 	{
-		//search for the item
+		//search for item
 		for (int i = 0; i < 10; i++)
 		{
 			if (inventory[i].inventoryID == item)
 			{
-				//display the item
+				//display item
 				cout << "Item " << inventory[i].productName << ": " << "How many would you like to purchase? ";
 				int quantity;
 				cin >> quantity;
@@ -114,7 +100,7 @@ int main()
 					inventory[i].quantity -= quantity;
 					//display the total
 					double total = inventory[i].cost * quantity;
-					cout << "Cost for all those items: $" << total << endl;
+					cout << "Cost for all those items: $" << fixed << setprecision(2) << total << endl;
 					// add total to the running total
 					
 					runningTotal += total;
@@ -153,58 +139,15 @@ void displayInventory(Inventory inventory[], int size)
 	cout << "Inventory List\n\n";
 	cout << "ID\tProduct Name\tCost\tQuantity\n";
 	cout << "-----------------------------------------\n";
-
-	if (choice == 'd')
-	{
-		for (int i = 0; i < 6; i++)
+	int k = 0;
+	//use setw to format the output
+		for (k = 0; k < size; k++)
 		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
+			cout << setw(6) << inventory[k].inventoryID;
+			cout << setw(12) << inventory[k].productName << "     ";
+			cout << setw(6) << dollarFormat(inventory[k].cost);
+			cout << setw(6) << inventory[k].quantity << endl;
 		} //end for loop
-		for (int i = 6; i < 9; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		cout << inventory[9].inventoryID << "\t" << inventory[9].productName << "\t\t$" << inventory[9].cost << fixed << setprecision(2) << "\t" << inventory[9].quantity << endl;
-	} //end if statement
-	else if (choice == 'p')
-	{
-		// for the first item in the array add a zero to the cost
-		cout << inventory[0].inventoryID << "\t" << inventory[0].productName << "\t\t$" << inventory[0].cost << fixed << setprecision(2) << "0" << "\t" << inventory[0].quantity << endl;
-		for (int i = 1; i < 5; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		for (int i = 5; i < 6; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		for (int i = 6; i < 7; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		for (int i = 7; i < 8; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		for (int i = 8; i < 9; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		cout << inventory[9].inventoryID << "\t" << inventory[9].productName << "\t$" << inventory[9].cost << fixed << setprecision(2) << "\t" << inventory[9].quantity << endl;
-	} //end else if statement
-	else
-	{
-		// do not sort the inventory, just display it
-		for (int i = 0; i < 6; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		for (int i = 6; i < 9; i++)
-		{
-			cout << inventory[i].inventoryID << "\t" << inventory[i].productName << "\t$" << inventory[i].cost << fixed << setprecision(2) << "\t" << inventory[i].quantity << endl;
-		} //end for loop
-		cout << inventory[9].inventoryID << "\t" << inventory[9].productName << "\t\t$" << inventory[9].cost << fixed << setprecision(2) << "\t" << inventory[9].quantity << endl;
-	} //end else statement
 	cout << endl;
 } //end displayInventory function
 
