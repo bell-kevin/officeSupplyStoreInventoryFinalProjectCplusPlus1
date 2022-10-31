@@ -27,7 +27,7 @@ Here are images that demonstrate the functionality of this project:
 
 Inventory sorted by ID ascending (smallest to largest):
 
-Final - sort by ID   
+![Final - sort by ID](https://github.com/bell-kevin/officeSupplyStoreInventoryFinalProjectCplusPlus1/blob/main/final.PNG)   
 
 Inventory sorted by price ascending (smallest to largest):
 
