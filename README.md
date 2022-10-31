@@ -55,6 +55,8 @@ Final - no purchase
 
 Validate the item ID the user provides and keep prompting the user until it is valid. Check if there is available inventory for the purchase, and if not, do not complete the transaction but present an error message. If there were no purchases before the user decided to quit, do not display a total cost of $0 -- don't display anything at all about a purchase. All money values must be displayed in currency format -- with a dollar sign, a comma separator if the value is in the thousands, a decimal point and 2 decimal places. The inventory list must display with column headings, as seen in the images.
 
+![p](https://github.com/bell-kevin/officeSupplyStoreInventoryFinalProjectCplusPlus1/blob/main/final0000.PNG)
+
 Use functions to display the array with column headings; to sort the array by ID; to sort the array by price; to format numbers and strings to display correctly as money.
 
 Create a table of test cases BEFORE you write the code. Include test cases for all of the bad input options as well as at least 2 cases for good input. Run the project and test all the bad cases, taking screenshots of each one. Run the project 2 times with good input and take screenshots.
