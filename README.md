@@ -35,7 +35,7 @@ Inventory sorted by price ascending (smallest to largest):
 
 If the user does not select an appropriate sorting option, don't sort the file, just display it as it was loaded from the file:
 
-Final - sort bad
+![Final - sort bad](https://github.com/bell-kevin/officeSupplyStoreInventoryFinalProjectCplusPlus1/blob/main/final00.PNG)
 
 This shows 2 good purchases after sorting by ID:
 
